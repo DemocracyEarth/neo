@@ -1,0 +1,28 @@
+{
+  "name": "neo",
+  "version": "1.0.0",
+  "description": "A Node.js project integrating AI, social media analysis, and Web3 smart wallet management to empower community-driven economic decisions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DemocracyEarth/neo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DemocracyEarth/neo/issues"
+  },
+  "homepage": "https://github.com/DemocracyEarth/neo#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.2",
+    "express": "^4.21.0",
+    "node-cron": "^3.0.3",
+    "openai": "^4.61.0"
+  }
+}
