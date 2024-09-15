@@ -1,18 +1,25 @@
 import { NextResponse } from 'next/server';
-import axios from 'axios';
 
-export async function POST(request) {
+export async function POST(req) {
+  const body = await req.json();
+
   try {
-    const { prompt } = await request.json();
-
-    // Send request to the GOV microservice
-    const response = await axios.post('http://gov-server-ip:8001/process_request', {
-      prompt: prompt
+    const response = await fetch('http://0.0.0.0:8001/process_request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     });
 
-    return NextResponse.json({ result: response.data.response });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("Error calling GOV:", error);
-    return NextResponse.json({ error: "Failed to communicate with GOV microservice" }, { status: 500 });
+    console.error('Error:', error);
+    return NextResponse.json({ error: 'An error occurred while processing your request.' }, { status: 500 });
   }
 }
