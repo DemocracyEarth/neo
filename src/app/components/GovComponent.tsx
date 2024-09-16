@@ -10,92 +10,73 @@ export default function GovComponent({ defaultPrompt }: GovComponentProps) {
   const [name, setName] = useState('');
   const [dataUrl, setDataUrl] = useState('');
   const [blockchainAddress, setBlockchainAddress] = useState('');
-  const [metaPrompt, setMetaPrompt] = useState('');
-
-  const sampleMetaPrompt = `As an AI governance system, your primary objective is to make decisions that benefit the community while adhering to the following principles:
-
-1. Prioritize long-term sustainability over short-term gains
-2. Ensure equitable distribution of resources
-3. Protect individual privacy and data rights
-4. Promote transparency in decision-making processes
-5. Consider environmental impact in all policy decisions
-
-When presented with a policy question:
-1. Analyze the provided data from the specified URL
-2. Consider multiple perspectives and potential outcomes
-3. Propose a solution that aligns with the above principles
-4. Provide a clear rationale for the decision
-5. Suggest implementation steps and potential challenges`;
+  const [metaPrompt, setMetaPrompt] = useState(defaultPrompt);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">Gov AI Interface Editor</h1>
-      
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Interface Name</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter a custom name for this interface"
-          className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center text-blue-600">Gov AI Interface Editor</h1>
+        
+        <div className="space-y-6">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Interface Name</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter a custom name for this interface"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p className="mt-1 text-xs text-gray-500">Example: Economic Policy AI</p>
+          </div>
 
-      <div className="mb-4">
-        <label htmlFor="dataUrl" className="block text-sm font-medium text-gray-700 mb-1">Data Feed URL</label>
-        <input
-          type="url"
-          id="dataUrl"
-          value={dataUrl}
-          onChange={(e) => setDataUrl(e.target.value)}
-          placeholder="Enter URL for conversation data to train the AI"
-          className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+          <div>
+            <label htmlFor="dataUrl" className="block text-sm font-medium text-gray-700">Data Feed URL</label>
+            <input
+              type="url"
+              id="dataUrl"
+              value={dataUrl}
+              onChange={(e) => setDataUrl(e.target.value)}
+              placeholder="Enter URL for conversation data to train the AI"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p className="mt-1 text-xs text-gray-500">Example: https://example.com/economic-policy-discussions.json</p>
+          </div>
 
-      <div className="mb-4">
-        <label htmlFor="blockchainAddress" className="block text-sm font-medium text-gray-700 mb-1">Blockchain Address</label>
-        <input
-          type="text"
-          id="blockchainAddress"
-          value={blockchainAddress}
-          onChange={(e) => setBlockchainAddress(e.target.value)}
-          placeholder="Enter Ethereum-compatible blockchain address for contributions"
-          className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+          <div>
+            <label htmlFor="blockchainAddress" className="block text-sm font-medium text-gray-700">Blockchain Address</label>
+            <input
+              type="text"
+              id="blockchainAddress"
+              value={blockchainAddress}
+              onChange={(e) => setBlockchainAddress(e.target.value)}
+              placeholder="Enter Ethereum-compatible blockchain address for contributions"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p className="mt-1 text-xs text-gray-500">Example: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e</p>
+          </div>
 
-      <div className="mb-4">
-        <label htmlFor="metaPrompt" className="block text-sm font-medium text-gray-700 mb-1">Meta-Prompt (Constitution)</label>
-        <textarea
-          id="metaPrompt"
-          value={metaPrompt}
-          onChange={(e) => setMetaPrompt(e.target.value)}
-          placeholder={sampleMetaPrompt}
-          rows={10}
-          className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+          <div>
+            <label htmlFor="metaPrompt" className="block text-sm font-medium text-gray-700">Meta-Prompt [Constitution]</label>
+            <textarea
+              id="metaPrompt"
+              value={metaPrompt}
+              onChange={(e) => setMetaPrompt(e.target.value)}
+              rows={10}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p className="mt-1 text-xs text-gray-500">This is the constitution for the AI's decision-making process.</p>
+          </div>
 
-      <div className="mb-4">
-        <label htmlFor="defaultPrompt" className="block text-sm font-medium text-gray-700 mb-1">Default Prompt</label>
-        <textarea
-          id="defaultPrompt"
-          value={defaultPrompt}
-          readOnly
-          rows={3}
-          className="w-full p-2 border rounded bg-gray-100"
-        />
+          <button
+            type="button"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Save Interface
+          </button>
+        </div>
       </div>
-
-      <button
-        type="button"
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-      >
-        Save Interface
-      </button>
     </div>
   );
 }
