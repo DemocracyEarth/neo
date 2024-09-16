@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const govInterfaces = [
+export const govInterfaces = [
   { id: 'economic', title: 'Economic Policy', icon: '💰' },
   { id: 'social', title: 'Social Welfare', icon: '🤝' },
   { id: 'environmental', title: 'Environmental', icon: '🌳' },
