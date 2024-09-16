@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-export const govInterfaces = [
-  { id: 'economic', title: 'Economic Policy', icon: '💰' },
-  { id: 'social', title: 'Social Welfare', icon: '🤝' },
-  { id: 'environmental', title: 'Environmental', icon: '🌳' },
-  { id: 'education', title: 'Education', icon: '🎓' },
-  { id: 'healthcare', title: 'Healthcare', icon: '🏥' },
-  { id: 'infrastructure', title: 'Infrastructure', icon: '🏗️' },
-];
+export const govInterfaces = {
+  economic: { id: 'economic', title: 'Economic Policy', icon: '💰' },
+  social: { id: 'social', title: 'Social Welfare', icon: '🤝' },
+  environmental: { id: 'environmental', title: 'Environmental', icon: '🌳' },
+  education: { id: 'education', title: 'Education', icon: '🎓' },
+  healthcare: { id: 'healthcare', title: 'Healthcare', icon: '🏥' },
+  infrastructure: { id: 'infrastructure', title: 'Infrastructure', icon: '🏗️' },
+};
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-12">GovAI Interfaces</h1>
         <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {govInterfaces.map((item) => (
+          {Object.values(govInterfaces).map((item) => (
             <Link href={`/gov/${item.id}`} key={item.id} className="block">
               <article className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 text-center">
                 <p className="text-5xl mb-4">{item.icon}</p>

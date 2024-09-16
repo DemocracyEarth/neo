@@ -13,8 +13,8 @@ export default function GovComponent({ defaultPrompt }: GovComponentProps) {
   const [metaPrompt, setMetaPrompt] = useState(defaultPrompt);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl w-full space-y-8 bg-white p-6 rounded-lg shadow-lg">
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto space-y-8 bg-white p-6 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-center text-blue-600">Gov AI Interface Editor</h1>
         
         <div className="space-y-6">

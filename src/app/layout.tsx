@@ -1,10 +1,10 @@
-import './globals.css'
-import type { Metadata } from 'next'
+import Header from './components/Header';
+import './globals.css';
 
-export const metadata: Metadata = {
-  title: 'Gov AI Interfaces',
-  description: 'A platform for various Gov AI interfaces',
-}
+export const metadata = {
+  title: 'Gov AI Interface',
+  description: 'AI-powered governance interface editor',
+};
 
 export default function RootLayout({
   children,
@@ -13,7 +13,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main className="min-h-screen bg-gray-100">
+          {children}
+        </main>
+      </body>
     </html>
-  )
+  );
 }
