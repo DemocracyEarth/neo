@@ -1,12 +1,30 @@
-import GovComponent from "./components/govComponent";
+import Link from 'next/link';
+
+const govInterfaces = [
+  { id: 'economic', title: 'Economic Policy', icon: '💰' },
+  { id: 'social', title: 'Social Welfare', icon: '🤝' },
+  { id: 'environmental', title: 'Environmental', icon: '🌳' },
+  { id: 'education', title: 'Education', icon: '🎓' },
+  { id: 'healthcare', title: 'Healthcare', icon: '🏥' },
+  { id: 'infrastructure', title: 'Infrastructure', icon: '🏗️' },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <main className="bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">GOV AI Interface</h1>
-        <GovComponent />
-      </main>
-    </div>
+    <main className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-12">GovAI Interfaces</h1>
+        <nav className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {govInterfaces.map((item) => (
+            <Link href={`/gov/${item.id}`} key={item.id} className="block">
+              <article className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 text-center">
+                <p className="text-5xl mb-4">{item.icon}</p>
+                <h2 className="text-xl font-semibold">{item.title}</h2>
+              </article>
+            </Link>
+          ))}
+        </nav>
+      </section>
+    </main>
   );
 }

@@ -2,80 +2,48 @@
 
 import { useState } from 'react';
 
-export default function GovComponent() {
-  const [result, setResult] = useState('');
-  const [prompt, setPrompt] = useState('');
-  const [model, setModel] = useState('gpt-3.5-turbo');
+interface GovComponentProps {
+  defaultPrompt: string;
+}
+
+export default function GovComponent({ defaultPrompt }: GovComponentProps) {
+  const [prompt, setPrompt] = useState(defaultPrompt);
+  const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendRequestToGov = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsLoading(true);
-    try {
-      const response = await fetch('/api/callGov', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt, model }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      setResult(data.response);
-    } catch (error) {
-      console.error('Error:', error);
-      setResult('An error occurred while processing your request.');
-    } finally {
+    // Here you would typically make an API call to your AI service
+    // For now, we'll just simulate a response after a delay
+    setTimeout(() => {
+      setResponse(`AI response to: ${prompt}`);
       setIsLoading(false);
-    }
+    }, 1000);
   };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-1">
-          Enter your prompt:
-        </label>
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <form onSubmit={handleSubmit}>
         <textarea
-          id="prompt"
+          className="w-full p-2 border rounded-md mb-4"
           rows={4}
-          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Type your prompt here..."
+          placeholder="Enter your prompt here..."
         />
-      </div>
-      
-      <div>
-        <label htmlFor="model" className="block text-sm font-medium text-gray-700 mb-1">
-          Select AI model:
-        </label>
-        <select
-          id="model"
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-          className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
+          disabled={isLoading}
         >
-          <option value="gpt-3.5-turbo">GPT-3.5</option>
-          <option value="claude">Claude</option>
-        </select>
-      </div>
-      
-      <button
-        onClick={sendRequestToGov}
-        disabled={isLoading}
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-      >
-        {isLoading ? 'Processing...' : 'Send Request to GOV'}
-      </button>
-      
-      {result && (
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold mb-2">Response:</h2>
-          <p className="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap">{result}</p>
+          {isLoading ? 'Processing...' : 'Submit'}
+        </button>
+      </form>
+      {response && (
+        <div className="mt-6">
+          <h2 className="text-xl font-semibold mb-2">Response:</h2>
+          <p className="bg-gray-100 p-4 rounded-md">{response}</p>
         </div>
       )}
     </div>
